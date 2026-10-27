@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0](https://github.com/aimuzov/shkatova-psychologist/compare/v1.2.2...v1.3.0) (2026-10-27)
+
+
+### Features
+
+* report browser and chat errors to Sentry ([fd3240c](https://github.com/aimuzov/shkatova-psychologist/commit/fd3240c9f0317cea5be2c2c9a5df6f845ef43665))
+* report browser and chat errors to Sentry ([b17044a](https://github.com/aimuzov/shkatova-psychologist/commit/b17044ae8750fef174d39ac599db49ce7843d5d3))
+
+
+### Bug Fixes
+
+* keep the bot token and model output out of chat error events ([7a901fa](https://github.com/aimuzov/shkatova-psychologist/commit/7a901faa3dea43ca7ec88ba7aac329308d54c3dd))
+
 ## [1.2.2](https://github.com/aimuzov/shkatova-psychologist/compare/v1.2.1...v1.2.2) (2026-10-24)
 
 
