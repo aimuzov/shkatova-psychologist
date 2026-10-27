@@ -13,9 +13,22 @@ if (process.env.SENTRY_DSN) {
 		release: `${pkg.name}@${pkg.version}`,
 		environment: 'production',
 		dataCollection,
+		// Исходящие запросы без хлебных крошек: у Telegram токен бота лежит прямо в пути URL.
 		integrations: (defaults) => [
-			...defaults.filter(({ name }) => !droppedIntegrations.includes(name) && name !== 'Http'),
-			Sentry.httpIntegration({ sessions: false }),
+			...defaults.filter(
+				({ name }) => !droppedIntegrations.includes(name) && !['Http', 'NodeFetch'].includes(name),
+			),
+			Sentry.httpIntegration({ sessions: false, breadcrumbs: false }),
+			Sentry.nativeNodeFetchIntegration({ breadcrumbs: false }),
 		],
+		// Сообщение SyntaxError из JSON.parse цитирует разобранный текст, а это поток ответа
+		// модели или аргументы выжимки, то есть пересказ разговора. Тип и стектрейс остаются.
+		beforeSend(event) {
+			for (const exception of event.exception?.values ?? []) {
+				if (exception.type === 'SyntaxError') exception.value = 'Invalid JSON (message dropped)'
+			}
+
+			return event
+		},
 	})
 }
