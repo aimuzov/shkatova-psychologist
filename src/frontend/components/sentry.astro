@@ -1,0 +1,25 @@
+---
+// Ошибки браузера в Sentry. Стоит в <head>: добавляет в CSP страницы адрес приёма Sentry.
+// Без DSN и на dev-сервере не выводит ничего, тогда и скрипт на страницу не попадает.
+import pkg from '#package.json'
+
+const dsn = import.meta.env.PUBLIC_SENTRY_DSN
+const enabled = import.meta.env.PROD && Boolean(dsn)
+
+if (enabled) Astro.csp?.insertDirective(`connect-src ${new URL(dsn).origin}`)
+
+const config = JSON.stringify({ dsn, release: `${pkg.name}@${pkg.version}`, environment: 'production' })
+---
+
+{enabled && (
+	<>
+		<meta name="sentry" content={config} />
+		<script>
+			import { bootSentry } from '#frontend/lib/sentry-boot.ts'
+
+			const meta = document.querySelector<HTMLMetaElement>('meta[name="sentry"]')
+
+			if (meta) bootSentry(JSON.parse(meta.content))
+		</script>
+	</>
+)}
