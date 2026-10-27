@@ -13,6 +13,7 @@ import golosLat from '@fontsource/golos-text/files/golos-text-latin-400-normal.w
 import golosLat500 from '@fontsource/golos-text/files/golos-text-latin-500-normal.woff2?url'
 import golosLatExt from '@fontsource/golos-text/files/golos-text-latin-ext-400-normal.woff2?url'
 import '#frontend/styles/global.css'
+import Sentry from '#frontend/components/sentry.astro'
 import og from '#frontend/assets/og.jpg'
 import { person } from '#shared/site.ts'
 
@@ -69,6 +70,7 @@ const metrikaId = 113579697
 		))}
 
 		<Metrika id={metrikaId} />
+		<Sentry />
 	</head>
 	<body>
 		<MetrikaPixel id={metrikaId} />

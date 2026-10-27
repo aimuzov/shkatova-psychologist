@@ -1,4 +1,5 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http'
+import { captureException } from '@sentry/node'
 
 import { complete, type Message, type Usage } from './openrouter.ts'
 import type { Summary } from './prompt.ts'
@@ -141,6 +142,7 @@ async function chat(req: IncomingMessage, res: ServerResponse) {
 					delivered = true
 				} catch (error) {
 					console.error('summary delivery failed:', (error as Error).message)
+					captureException(error)
 				}
 			}
 
@@ -151,6 +153,7 @@ async function chat(req: IncomingMessage, res: ServerResponse) {
 		if (!abort.signal.aborted) {
 			status = 'error'
 			console.error('completion failed:', (error as Error).message)
+			captureException(error)
 			send('error', { error: 'Не получилось ответить, попробуйте отправить сообщение ещё раз' })
 		} else status = 'aborted'
 	}
@@ -172,6 +175,7 @@ createServer((req, res) => {
 	if (req.method === 'POST' && path === '/api/chat') {
 		chat(req, res).catch((error) => {
 			console.error(error)
+			captureException(error)
 
 			if (!res.headersSent) json(res, 500, { error: 'Ошибка сервера' })
 			else res.end()

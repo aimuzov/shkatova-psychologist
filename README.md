@@ -26,7 +26,7 @@
 	</tr>
 </table>
 
-Lives at [tatiana-shkatova.ru](https://tatiana-shkatova.ru). A static [Astro](https://astro.build) site with a single Svelte island, the assistant chat, plus a small dependency-free Node service (`src/backend/`) that talks to the model through OpenRouter and delivers summaries via Telegram.
+Lives at [tatiana-shkatova.ru](https://tatiana-shkatova.ru). A static [Astro](https://astro.build) site with a single Svelte island, the assistant chat, plus a small Node service (`src/backend/`) that talks to the model through OpenRouter and delivers summaries via Telegram. Errors of both go to [Sentry](https://sentry.io), the project `shkatova-psychologist`: no tracing or sessions, and no request bodies, headers, cookies or query strings, so the conversation never ends up in an event. The DSN is `PUBLIC_SENTRY_DSN` for the site build and `SENTRY_DSN` for the chat; without it Sentry is off, and the dev server never loads it.
 
 The site and the assistant are in Russian, so the names below are translated.
 
@@ -64,7 +64,7 @@ The e2e tests in [`e2e`](e2e) build the site and open it in Chromium with the sh
 The build puts a CSP with hashes of Astro's scripts and styles into every page (the `security.csp` option in `astro.config.mjs`). `npm run dev` has no policy, so violations only show up after `npm run build && npm run preview` and in production.
 
 - No `style=""` attributes or handlers like `onclick`: styles go through classes and rules in `<style>`, handlers live in `<script>`.
-- An external script, image or request (a widget, a map, a font from a CDN) has to be allowed in `security.csp` first. Right now only Yandex Metrica is there.
+- An external script, image or request (a widget, a map, a font from a CDN) has to be allowed in `security.csp` first. Right now only Yandex Metrica is there, and the Sentry ingest host is added by `components/sentry.astro` when the DSN is set.
 - After such changes, check the browser console in `npm run preview`: the browser reports everything it blocks there.
 
 ## Deployment
