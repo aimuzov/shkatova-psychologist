@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.2](https://github.com/aimuzov/shkatova-psychologist/compare/v1.3.1...v1.3.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **deps:** move to infra-site-kit 5.9.1 with the strict Sentry events ([65bf3cb](https://github.com/aimuzov/shkatova-psychologist/commit/65bf3cb5a2079e763498d6b505abfe9760d102a7))
+* **deps:** move to infra-site-kit 5.9.1 with the strict Sentry events ([fd6c26a](https://github.com/aimuzov/shkatova-psychologist/commit/fd6c26a450adba039a6c883e0890ced4e709173f))
+
 ## [1.3.1](https://github.com/aimuzov/shkatova-psychologist/compare/v1.3.0...v1.3.1) (2026-10-27)
 
 
