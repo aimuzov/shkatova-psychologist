@@ -1,4 +1,5 @@
 ---
+import Seo from '@aimuzov/infra-site-kit/seo.astro'
 import Metrika from '@aimuzov/infra-site-kit/metrika.astro'
 import MetrikaPixel from '@aimuzov/infra-site-kit/metrika-pixel.astro'
 import '@aimuzov/infra-site-kit/base.css'
@@ -47,17 +48,18 @@ const metrikaId = 113579697
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{title}</title>
-		<meta name="description" content={description} />
-		{index ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex" />}
+		<Seo
+			title={title}
+			description={description}
+			siteName={person.name}
+			url={canonical}
+			locale="ru_RU"
+			type="website"
+			canonical={index ? canonical : undefined}
+			robots={index ? undefined : 'noindex'}
+		/>
 		{/* Карточка ссылки в мессенджерах. og.jpg вырезан из hero.jpg в пропорции 1.91:1 лицом по центру:
 		    снимки вертикальные, а автоматическая обрезка ловила статуэтку вместо лица. */}
-		<meta property="og:type" content="website" />
-		<meta property="og:site_name" content={person.name} />
-		<meta property="og:locale" content="ru_RU" />
-		<meta property="og:url" content={canonical} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
 		<meta property="og:image" content={new URL(og.src, Astro.site)} />
 		<meta property="og:image:width" content={String(og.width)} />
 		<meta property="og:image:height" content={String(og.height)} />
