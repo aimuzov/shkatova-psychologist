@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/aimuzov/shkatova-psychologist/compare/v1.3.2...v1.4.0) (2026-11-12)
+
+
+### Features
+
+* **deploy:** publish Shkatova site and chat images ([#40](https://github.com/aimuzov/shkatova-psychologist/issues/40)) ([004500f](https://github.com/aimuzov/shkatova-psychologist/commit/004500f9614f89bca69ab7d6deb35c9df3c4615f))
+
 ## [1.3.2](https://github.com/aimuzov/shkatova-psychologist/compare/v1.3.1...v1.3.2) (2026-10-28)
 
 
