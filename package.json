@@ -32,7 +32,7 @@
 		"@astrojs/svelte": "9.1.6",
 		"@fontsource/golos-text": "5.3.0",
 		"@fontsource/prata": "5.3.0",
-		"@playwright/test": "1.64.0",
+		"@playwright/test": "1.65.1",
 		"@sentry/browser": "11.9.0",
 		"@types/node": "26.6.6",
 		"astro": "7.4.13",
